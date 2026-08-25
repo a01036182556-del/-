@@ -1,0 +1,131 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<title>Claude 활용 리포트</title>
+<!--
+  ★ A4 인쇄 안전 리포트 템플릿 (잘림 방지) ★
+  스킬이 이 파일을 복제해 [[...]] 부분만 실제 데이터로 바꿔 쓴다. CSS·구조는 그대로 둘 것.
+  ❌ 절대 금지: overflow:hidden, 고정 height, 텍스트 자르기(text truncate), A4 폭 초과 요소
+  ✅ 모든 글은 자유롭게 흐르게(flow), 카드는 break-inside:avoid 로 페이지 사이에서 안 쪼개지게.
+  항목(강점·사례·축)은 개수만큼 블록을 복제해서 늘리면 된다.
+-->
+<style>
+@page { size: A4 portrait; margin: 12mm 11mm; }
+* { box-sizing: border-box; }
+html,body { margin:0; padding:0; }
+body { font-family:'Malgun Gothic','맑은 고딕',sans-serif; color:#222831; font-size:12.5px; line-height:1.55; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.page { max-width:188mm; margin:0 auto; }       /* A4(210) - 좌우여백 = 188mm. 절대 넘기지 말 것 */
+h2 { font-size:15px; color:#1f3a5f; margin:0 0 9px; }
+.cover { background:linear-gradient(135deg,#1f3a5f,#7c5cbf); color:#fff; border-radius:14px; padding:18px 22px; display:flex; justify-content:space-between; align-items:center; gap:14px; break-inside:avoid; }
+.cover h1 { margin:0 0 3px; font-size:20px; }
+.cover p { margin:0; opacity:.9; font-size:12px; }
+.cover .lvl { display:inline-block; background:#fff; color:#7c5cbf; font-weight:800; border-radius:16px; padding:2px 12px; font-size:12px; margin-top:6px; }
+.cover .sc { text-align:center; background:rgba(255,255,255,.14); border-radius:12px; padding:10px 18px; flex:0 0 auto; }
+.cover .sc b { font-size:38px; line-height:1; display:block; }
+.cover .sc span { font-size:11.5px; opacity:.9; }
+.kpis { display:flex; gap:8px; margin:10px 0; }
+.kpi { flex:1; border:1px solid #e3e6ec; border-radius:10px; padding:9px; text-align:center; break-inside:avoid; }
+.kpi b { font-size:17px; color:#1f3a5f; display:block; } .kpi span { font-size:11px; color:#5f6470; }
+.card { border:1px solid #e3e6ec; border-radius:12px; padding:13px 16px; margin:11px 0; break-inside:avoid; }
+/* 5축: 세로 나열 — 각 축은 [제목+점수] + 막대 + 설명(자유 흐름). 절대 자르지 않음 */
+.axis { margin:9px 0; break-inside:avoid; }
+.axis .h { display:flex; justify-content:space-between; align-items:baseline; }
+.axis .h b { font-size:13px; color:#1f3a5f; } .axis .h .v { font-size:12px; color:#5f6470; font-weight:700; }
+.axis .tr { background:#eceff3; border-radius:5px; height:9px; margin:4px 0 5px; overflow:hidden; }
+.axis .tr i { display:block; height:100%; background:#2f6fb0; border-radius:5px; }
+.axis .d { font-size:12px; color:#444b57; }            /* 설명: 길어도 그대로 흐름 */
+.score .row { display:flex; align-items:center; gap:9px; margin:5px 0; }
+.score .row .lb { width:84px; font-size:12px; flex:0 0 auto; }
+.score .row .tr { flex:1; background:#eceff3; height:13px; border-radius:5px; overflow:hidden; }
+.score .row .tr i { display:block; height:100%; border-radius:5px; }
+.score .row .v { width:58px; text-align:right; font-size:11.5px; color:#5f6470; flex:0 0 auto; }
+.split { display:flex; gap:12px; } .split > div { flex:1; border:1px solid #e3e6ec; border-radius:10px; padding:10px 12px; background:#fbfcfe; break-inside:avoid; }
+.split .t { font-weight:800; color:#1f3a5f; font-size:13px; } .split .n { font-size:12px; color:#5f6470; margin-top:3px; }
+ul { margin:5px 0; padding-left:19px; } li { margin:6px 0; break-inside:avoid; }
+li b { color:#1f3a5f; }
+.case { background:#f3effb; border:1px solid #ddd2f2; border-radius:10px; padding:11px 14px; margin:8px 0; color:#41385f; break-inside:avoid; }
+.case b { color:#5b3fa0; }
+.chip { display:inline-block; background:#eef0f5; border:1px solid #e3e6ec; border-radius:14px; padding:2px 10px; font-size:12px; margin:3px 4px 3px 0; }
+.foot { text-align:center; color:#8a8f9c; font-size:11px; margin-top:14px; }
+</style></head>
+<body><div class="page">
+
+<!-- 표지 -->
+<div class="cover">
+  <div>
+    <h1>[[성명]] 님의 Claude 활용 리포트</h1>
+    <p>[[부서]] · 금도건설 · 기준 [[기준일]] · 분석기간 [[기간]]</p>
+    <div class="lvl">★ [[레벨]]</div>
+  </div>
+  <div class="sc"><b>[[총점]]</b><span>/ 100점</span></div>
+</div>
+
+<!-- 요약 KPI (4칸, 데이터에 맞게) -->
+<div class="kpis">
+  <div class="kpi"><b>[[활성일]]</b><span>활성일수</span></div>
+  <div class="kpi"><b>[[도구호출]]</b><span>도구 호출</span></div>
+  <div class="kpi"><b>[[산출물]]</b><span>산출물</span></div>
+  <div class="kpi"><b>[[커스텀스킬]]</b><span>스킬</span></div>
+</div>
+
+<!-- 점수 분해 -->
+<div class="card score">
+  <h2>점수 분해 — 객관 80 + AI 20 (비율 기반)</h2>
+  <div class="row"><span class="lb">① 활동량</span><div class="tr"><i style="width:[[활동량%]]%;background:#7c5cbf"></i></div><span class="v">[[활동량]] / 20</span></div>
+  <div class="row"><span class="lb">② 지속성</span><div class="tr"><i style="width:[[지속성%]]%;background:#1d9e75"></i></div><span class="v">[[지속성]] / 22</span></div>
+  <div class="row"><span class="lb">③ 최근성</span><div class="tr"><i style="width:[[최근성%]]%;background:#2f6fb0"></i></div><span class="v">[[최근성]] / 14</span></div>
+  <div class="row"><span class="lb">④ 다양성</span><div class="tr"><i style="width:[[다양성%]]%;background:#c98a00"></i></div><span class="v">[[다양성]] / 16</span></div>
+  <div class="row"><span class="lb">⑤ 몰입</span><div class="tr"><i style="width:[[몰입%]]%;background:#2f9e9e"></i></div><span class="v">[[몰입]] / 8</span></div>
+  <div class="row"><span class="lb">⑥ AI</span><div class="tr"><i style="width:[[AI%]]%;background:#c0504d"></i></div><span class="v">[[AI]] / 20</span></div>
+  <div style="font-size:10.5px;color:#8a8f9c;margin-top:7px">활동량=총 도구호출(log) · 지속성=활성일+규칙성 · 최근성=최근30일 활성 · 다양성=커넥터·도구·스킬 · 몰입=활성일당 호출 · AI=확산·정착·자동화. <b>※ 객관 80점은 사용기록에서 자동 실측, AI 20점은 판단. 추세·이력은 대시보드(usage.gd-business.co.kr).</b></div>
+</div>
+
+<!-- AI 5축 (★ 각 축 설명은 길어도 자르지 말 것 — .axis .d 는 자유 흐름) -->
+<div class="card">
+  <h2>AI 활용깊이 5축 평가 <span style="font-size:11px;font-weight:400;color:#8a8f9c">(AI 20점 = 확산·정착·자동화 3축 기준)</span></h2>
+  <!-- 축 5개: 제목·점수·막대·설명. 설명을 절대 줄이거나 자르지 말 것 -->
+  <div class="axis"><div class="h"><b>문제정의</b><span class="v">[[문제정의]] / 5</span></div><div class="tr"><i style="width:[[문제정의%]]%"></i></div><div class="d">[[문제정의 설명]]</div></div>
+  <div class="axis"><div class="h"><b>자동화</b><span class="v">[[자동화]] / 5</span></div><div class="tr"><i style="width:[[자동화%]]%"></i></div><div class="d">[[자동화 설명]]</div></div>
+  <div class="axis"><div class="h"><b>복잡도</b><span class="v">[[복잡도]] / 5</span></div><div class="tr"><i style="width:[[복잡도%]]%"></i></div><div class="d">[[복잡도 설명]]</div></div>
+  <div class="axis"><div class="h"><b>정착도</b><span class="v">[[정착도]] / 5</span></div><div class="tr"><i style="width:[[정착도%]]%"></i></div><div class="d">[[정착도 설명]]</div></div>
+  <div class="axis"><div class="h"><b>확산</b><span class="v">[[확산]] / 5</span></div><div class="tr"><i style="width:[[확산%]]%"></i></div><div class="d">[[확산 설명]]</div></div>
+</div>
+
+<!-- 소스별 -->
+<div class="card">
+  <h2>소스별 활용 (코워크 · 코드 · 일반챗)</h2>
+  <div class="split">
+    <div><div class="t">코워크</div><div class="n">[[코워크 사용량·패턴]]</div></div>
+    <div><div class="t">코드</div><div class="n">[[코드 사용량·패턴]]</div></div>
+    <div><div class="t">일반챗</div><div class="n">[[일반챗 — 미포함이면 '미포함']]</div></div>
+  </div>
+</div>
+
+<!-- 강점 (4~6개, 숫자 근거. 항목은 복제해 늘림) -->
+<div class="card">
+  <h2>강점</h2>
+  <ul>
+    <li><b>[[강점 제목]]</b> — [[숫자 근거가 들어간 설명]]</li>
+    <li><b>[[강점 제목]]</b> — [[설명]]</li>
+    <!-- 필요한 만큼 li 복제 -->
+  </ul>
+</div>
+
+<!-- 더 활용하면 좋을 점 (3~5개, 구체 실행경로) -->
+<div class="card">
+  <h2>더 활용하면 좋을 점</h2>
+  <ul>
+    <li><b>[[제목]]</b> — [[무엇을·어떻게 할지 구체 실행 경로]]</li>
+    <li><b>[[제목]]</b> — [[설명]]</li>
+  </ul>
+</div>
+
+<!-- 인상적인 활용사례 (2~4개) — ★이 PDF는 관리자 열람용으로 서버 전송됨: 거래처·금액·실명·세무·급여 등 구체정보 금지, 업무 성격만 일반화 -->
+<div class="card">
+  <h2>인상적인 활용 사례 <span style="font-size:11px;font-weight:400;color:#8a8f9c">(관리자 열람용 서버 전송 · 민감정보 일반화)</span></h2>
+  <div class="case"><b>CASE 01 · [[제목]]</b><br>[[상세 2~3문장]]</div>
+  <div class="case"><b>CASE 02 · [[제목]]</b><br>[[상세]]</div>
+  <!-- 필요한 만큼 복제 -->
+</div>
+
+<div class="foot">Claude AI 활용분석 리포트 · [[성명]] · [[기준일]] 생성 · 회사 서버 전송(경영지원실 관리자 열람용) · 거래처·금액·실명 등 민감정보 일반화 처리</div>
+
+</div></body></html>
