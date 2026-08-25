@@ -1,6 +1,7 @@
 {
   "enabledPlugins": {
-    "geumdo-usage-cli@geumdo-usage": true
+    "geumdo-usage-cli@geumdo-usage": true,
+    "construction-equipment-ledger@geumdo-usage": true
   },
   "extraKnownMarketplaces": {
     "geumdo-usage": {

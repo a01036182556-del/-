@@ -1,0 +1,6 @@
+{
+  "name": "construction-equipment-ledger",
+  "version": "1.0.0",
+  "description": "건설기계 기초자료 관리대장 — 여러 건설기계 장비를 한 표에 등록·관리하는 Excel 대장 생성 및 서류 기반 자동 채움",
+  "author": { "name": "금도건설 경영지원실" }
+}
