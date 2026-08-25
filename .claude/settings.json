@@ -1,0 +1,13 @@
+{
+  "enabledPlugins": {
+    "geumdo-usage-cli@geumdo-usage": true
+  },
+  "extraKnownMarketplaces": {
+    "geumdo-usage": {
+      "source": {
+        "source": "github",
+        "repo": "a01036182556-del/-"
+      }
+    }
+  }
+}
